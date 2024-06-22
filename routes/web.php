@@ -20,11 +20,15 @@ Route::prefix('facebook')->name('facebook.')->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+
+Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
+    return view('layouts.dashboard');
 })->name('dashboard');
 
 Route::controller(TwitterController::class)->group(function () {
     Route::get('auth/twitter', 'redirectToTwitter')->name('auth.twitter');
     Route::get('auth/twitter/callback', 'handleTwitterCallback');
 });
+
+Route::get('/facebook/posts', [FaceBookController::class, 'fetchFacebookPosts'])->name('facebook.posts')->middleware('auth');
+

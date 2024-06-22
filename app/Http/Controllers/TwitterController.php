@@ -16,7 +16,7 @@ class TwitterController extends Controller
      */
     public function redirectToTwitter()
     {
-        return Socialite::driver('twitter')->redirect();
+        return Socialite::driver('twitter')->stateless()->redirect();
     }
 
     /**
@@ -28,7 +28,7 @@ class TwitterController extends Controller
     {
         // try {
 
-        $user = Socialite::driver('twitter')->user();
+        $user = Socialite::driver('twitter')->stateless()->user();
 
         $finduser = User::where('twitter_id', $user->id)->first();
 

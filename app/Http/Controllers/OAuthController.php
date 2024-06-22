@@ -13,12 +13,12 @@ class OAuthController extends Controller
 {
     public function redirect(): RedirectResponse
     {
-        return Socialite::driver('twitter-oauth-2')->redirect();
+        return Socialite::driver('twitter')->redirect();
     }
 
     public function callback(): RedirectResponse
     {
-        $oAuthUser = Socialite::driver('twitter-oauth-2')->user();
+        $oAuthUser = Socialite::driver('twitter')->user();
 
         $user = User::updateOrCreate([
             'twitter_id' => $oAuthUser->getId(),

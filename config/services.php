@@ -17,6 +17,7 @@ return [
         'client_id' => env('TWITTER_CLIENT_ID'),
         'client_secret' => env('TWITTER_CLIENT_SECRET'),
         'redirect' => env('OAUTH_CALLBACK_URL'),
+        'oauth' => 2
     ],
 
     'facebook' => [
