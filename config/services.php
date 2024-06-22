@@ -20,8 +20,8 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => 'FB_CLIENT_ID', //USE FROM FACEBOOK DEVELOPER ACCOUNT
-        'client_secret' => 'FB_CLIENT_SECRET', //USE FROM FACEBOOK DEVELOPER ACCOUNT
+        'client_id' => env('FB_CLIENT_ID'), //USE FROM FACEBOOK DEVELOPER ACCOUNT
+        'client_secret' => env('FB_CLIENT_SECRET'), //USE FROM FACEBOOK DEVELOPER ACCOUNT
         'redirect' => env('APP_URL').'/facebook/callback/',
     ],
     'postmark' => [

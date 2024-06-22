@@ -19,6 +19,7 @@ class FaceBookController extends Controller
 
     public function callbackFromFacebook()
     {
+        return request()->all();
         try {
             $user = Socialite::driver('facebook')->user();
 
