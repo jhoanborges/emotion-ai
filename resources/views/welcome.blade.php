@@ -9,7 +9,7 @@
         <meta name="author" content="" />
         <title>{{ env('APP_NAME') }}</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <!-- Custom Google font-->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,8 +26,10 @@
             <!-- Navigation-->
             <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
                 <div class="container px-5">
-                    <a class="navbar-brand" href="index.html"><span
-                            class="fw-bolder text-primary">{{ env('APP_NAME') }}</span></a>
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        <img src={{ asset('logo.png') }} style="width:80px" />
+
+                        <span class="fw-bolder text-primary">{{ env('APP_NAME') }}</span></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation"><span
@@ -45,7 +47,7 @@
                 </div>
             </nav>
             <!-- Header-->
-            <header class="py-5">
+            <header class="py-2">
                 <div class="container px-5 pb-5">
                     <div class="row gx-5 align-items-center">
                         <div class="col-xxl-5">
