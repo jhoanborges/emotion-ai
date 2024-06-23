@@ -11,8 +11,8 @@ Other things to include:
 
 **Screenshot**: 
 
-![](https://raw.githubusercontent.com/cfpb/open-source-project-template/main/screenshot.png)
-
+![image](https://github.com/jhoanborges/emotion-ai/assets/32471957/e5bfba93-6849-472b-ba93-74eacb72df29)
+![image](https://github.com/jhoanborges/emotion-ai/assets/32471957/522d0f21-da5a-4e40-918a-bff4d383c0e7)
 
 ## Dependencies
 
