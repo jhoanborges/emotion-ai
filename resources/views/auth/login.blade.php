@@ -60,28 +60,33 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Login') }}
-                                    </button>
+                                    {{--
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Login') }}
+                                </button>
+                                --}}
 
-                                    <a href="{{ route('facebook.login') }}" class="btn btn-facebook btn-user btn-block">
+                                    <a href="{{ route('facebook.login') }}"
+                                        style="background: #1E9DEA; padding: 10px; width: 100%; text-align: center; display: block; border-radius:4px; color: #ffffff;">
                                         <i class="fab fa-facebook-f fa-fw"></i>
                                         Login with Facebook
                                     </a>
 
-
+                                    {{--
                                     <div class="flex items-center justify-end mt-4">
                                         <a class="btn" href="{{ route('auth.twitter') }}"
-                                            style="background: #1E9DEA; padding: 10px; width: 100%; text-align: center; display: block; border-radius:4px; color: #ffffff;">
-                                            Login with Twitter
-                                        </a>
-                                    </div>
+                                style="background: #1E9DEA; padding: 10px; width: 100%; text-align: center; display: block; border-radius:4px; color: #ffffff;">
+                                Login with Twitter
+                                </a>
+                            </div>
+                        
 
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
-                                        </a>
-                                    @endif
+                            @if (Route::has('password.request'))
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                {{ __('Forgot Your Password?') }}
+                            </a>
+                            @endif
+                                --}}
                                 </div>
                             </div>
                         </form>

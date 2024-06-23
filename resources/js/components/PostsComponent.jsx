@@ -1,5 +1,6 @@
 import React from 'react';
 import useSWR from 'swr';
+import ReactDOM from 'react-dom';
 
 function PostsComponent() {
     const { data: posts, error } = useSWR('/api/facebook/posts', fetcher); // Adjust URL as needed
@@ -32,6 +33,10 @@ function PostsComponent() {
 }
 
 export default PostsComponent;
+
+if (document.getElementById('facebook-posts')) {
+    ReactDOM.render(<PostsComponent />, document.getElementById('facebook-posts'));
+}
 
 // Example fetcher function for SWR
 const fetcher = async (url) => {

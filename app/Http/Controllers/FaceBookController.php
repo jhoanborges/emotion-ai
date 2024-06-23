@@ -69,9 +69,9 @@ class FaceBookController extends Controller
         try {
             // Check if there is existing social data for the user
             $socialData = SocialData::where('user_id', $user->id)->first();
-
-            if ($socialData && $this->isValidJson($socialData->data)) {
+            if ($socialData && count($socialData->data) > 0) {
                 // Use existing data from database if it's valid JSON
+
                 $posts = $socialData->data;
             } else {
                 // Fetch new data from Facebook API
@@ -87,7 +87,6 @@ class FaceBookController extends Controller
                     ]);
                 }
             }
-
             return view('layouts.posts', compact('posts'));
         } catch (\Exception $e) {
             return redirect()->route('dashboard')->withErrors(['msg' => 'Exception occurred: ' . $e->getMessage()]);
@@ -97,52 +96,32 @@ class FaceBookController extends Controller
     private function fetchPostsFromFacebook($accessToken)
     {
         $posts = [];
-        $limit = 100; // Desired number of posts to fetch
-        $totalPosts = 0;
-        $nextUrl = 'https://graph.facebook.com/v20.0/me/feed'; // Initial endpoint
+        $limit = 100; // Desired number of posts to fetch (up to the API limit)
+        $url = 'https://graph.facebook.com/v20.0/me/feed';
 
         try {
             $params = [
                 'access_token' => $accessToken,
                 'fields' => 'id,name,description,full_picture,video_buying_eligibility',
-                'limit' => 25, // Adjust as per your API rate limits
+                'limit' => $limit,
             ];
 
-            // Fetch posts until we reach the desired limit or no more pages
-            while ($totalPosts < $limit && $nextUrl) {
-                $response = Http::get($nextUrl, $params);
+            $response = Http::get($url, $params);
 
-                if ($response->successful()) {
-                    $data = $response->json();
+            if ($response->successful()) {
+                $data = $response->json();
 
-                    // Check if 'data' exists in the response
-                    if (isset($data['data'])) {
-                        $posts = array_merge($posts, $data['data']);
-                        $totalPosts += count($data['data']);
-                    }
-
-                    // Check if there is a next page
-                    $paging = isset($data['paging']) ? $data['paging'] : null;
-                    $nextUrl = isset($paging['next']) ? $paging['next'] : null;
-
-                    // If no more posts to fetch, exit the loop
-                    if (!$nextUrl) {
-                        break;
-                    }
-                } else {
-                    throw new \Exception('Failed to fetch Facebook posts: ' . $response->body());
+                // Check if 'data' exists in the response
+                if (isset($data['data'])) {
+                    $posts = $data['data'];
                 }
-            }
 
-            return $posts;
+                return $posts;
+            } else {
+                throw new \Exception('Failed to fetch Facebook posts: ' . $response->body());
+            }
         } catch (\Exception $e) {
             throw new \Exception('Failed to fetch Facebook posts: ' . $e->getMessage());
         }
-    }
-
-    private function isValidJson($string)
-    {
-        json_decode($string);
-        return (json_last_error() == JSON_ERROR_NONE);
     }
 }
